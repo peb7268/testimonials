@@ -1,0 +1,238 @@
+	html, body {
+	height: 100%;
+}
+/**** Isotope Filtering ****/
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/**** Isotope CSS3 transitions ****/
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+	padding: 0px 15px;
+	background: #fff;
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+#isotope_container, #container { 
+	display: block;
+	width: 100%;
+	margin: 30px 0 0 0;
+	position: relative;
+	
+}
+#isotope_wrapper {
+	height: 100%;
+	visibility: visible;
+	opacity: 0;
+	width: 95.7%;
+	margin: 0 auto;
+}
+
+#isotope_container {
+	margin:  0px auto;
+	padding: 5px;
+}
+
+/*-- Portfolio Page --*/
+.page-template-portfolio-php #content .columns {
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 0;
+}
+
+#content #filters_wrapper { 
+	margin: 0 auto;
+	/*height: 40px;*/
+	position: relative;
+	width: 95%;
+	/*
+	background: #333;
+	border-radius: 7px;
+	border: 1px solid black;
+	box-shadow: inset 0px 0px 3px #999, inset 1px 0px 0px #777, inset 0px -1px 4px #333, 0px 0px 2px #333;
+	*/
+}
+#content #filters {
+	margin: 25px 0 0 0;
+	float: left;
+	border-radius: 0 7px 7px 0;
+	overflow: hidden;
+	display: block;
+}
+#filters li { 
+	list-style: none;
+	float: left;
+	margin: 0 12px 0 0;
+	/* box-sizing: padding-box; */
+}
+
+#filters a { 
+	color: #333;
+	line-height: 1.4;
+	display: block;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	text-align: center;
+	width: 100%;
+	/*
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px black;
+	border-right: 1px solid black;
+	border-left: 1px solid #555;
+	border-top: 1px solid #667;	
+	background-color: #333333;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#333333), to(#000000));
+	background-image: -webkit-linear-gradient(top, #333333, #000000);
+	background-image: -moz-linear-gradient(top, #333333, #000000);
+	background-image: -o-linear-gradient(top, #333333, #000000);
+	background-image: -ms-linear-gradient(top, #333333, #000000);
+	background-image: linear-gradient(top, #333333, #000000);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#333333', EndColorStr='#000000');
+	*/
+}
+#filters a .sep { 
+	margin: 0 4px;
+	font-weight:;
+}
+
+#filters a:hover { 
+	/*
+	background-color: #bebebe;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), to(#333333));
+	background-image: -webkit-linear-gradient(top, #bebebe, #333333);
+	background-image: -moz-linear-gradient(top, #bebebe, #333333);
+	background-image: -o-linear-gradient(top, #bebebe, #333333);
+	background-image: -ms-linear-gradient(top, #bebebe, #333333);
+	background-image: linear-gradient(top, #bebebe, #333333);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#bebebe', EndColorStr='#333333');
+	*/
+}
+
+::selection {
+	background: none !important;
+}
+#filters a.selected{ 
+	/*
+	background-color: #bebebe;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), to(#333333));
+	background-image: -webkit-linear-gradient(top, #bebebe, #333333);
+	background-image: -moz-linear-gradient(top, #bebebe, #333333);
+	background-image: -o-linear-gradient(top, #bebebe, #333333);
+	background-image: -ms-linear-gradient(top, #bebebe, #333333);
+	background-image: linear-gradient(top, #bebebe, #333333);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#bebebe', EndColorStr='#333333');
+	*/
+}
+.page-template-portfolio-php .entry {
+	min-height: 600px;
+	position: relative;
+	top: 0px;
+	left: 0px; 
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+@media screen and (max-width: 540px) { 
+	#content #filters_wrapper { 
+		margin-bottom: 10px;
+	}
+	
+	#content #filters a { 
+		font-size: 8px;
+		line-height: 4.6;
+		padding: 0 12%;
+	}
+}
+.isotope-item {
+  /*margin: 0px 25px 25px 0px;*/
+  margin: 0px;
+  width: 250px;
+  height: 250px;	
+  overflow: hidden;
+}
+.isotope-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  height: 100%;
+  max-height: 350px;
+}
+#isotope_container .isotope-item p.testimonial, #isotope_container .isotope-item p.iso-label, #isotope_container .isotope-item p.case-study-2 {
+	position: relative;
+	z-index: 9999;
+	-webkit-transform:rotate(-45deg); 
+	-moz-transform:rotate(-45deg); 
+	padding: 55px 30px 0 30px;
+	position: absolute;
+	left: -50px;
+	top: -20px;
+	text-align: left;
+	color: #fff;
+	font-weight: bold;
+}
+#isotope_container .isotope-item p.case-study-2 {
+	background-color: #067cbd;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#067cbd), to(#073e88));
+	background-image: -webkit-linear-gradient(top, #067cbd, #073e88);
+	background-image: -moz-linear-gradient(top, #067cbd, #073e88);
+	background-image: -o-linear-gradient(top, #067cbd, #073e88);
+	background-image: -ms-linear-gradient(top, #067cbd, #073e88);
+	background-image: linear-gradient(top, #067cbd, #073e88);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#067cbd', EndColorStr='#073e88');   
+}
+#isotope_container .isotope-item p.testimonial {
+	background-color: #ff7073;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ff7073), to(#d51515));
+	background-image: -webkit-linear-gradient(top, #ff7073, #d51515);
+	background-image: -moz-linear-gradient(top, #ff7073, #d51515);
+	background-image: -o-linear-gradient(top, #ff7073, #d51515);
+	background-image: -ms-linear-gradient(top, #ff7073, #d51515);
+	background-image: linear-gradient(top, #ff7073, #d51515);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ff7073', EndColorStr='#d51515');
+
+}

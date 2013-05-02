@@ -224,6 +224,7 @@
 	background-image: -ms-linear-gradient(top, #067cbd, #073e88);
 	background-image: linear-gradient(top, #067cbd, #073e88);
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#067cbd', EndColorStr='#073e88');   
+	padding-left: 27px;
 }
 #isotope_container .isotope-item p.testimonial {
 	background-color: #ff7073;
@@ -234,5 +235,5 @@
 	background-image: -ms-linear-gradient(top, #ff7073, #d51515);
 	background-image: linear-gradient(top, #ff7073, #d51515);
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ff7073', EndColorStr='#d51515');
-
-}
+	padding-left: 25px;
+}	

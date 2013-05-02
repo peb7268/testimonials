@@ -7,26 +7,9 @@ define('PLUGIN_VIEWS', PLUGIN_DIR.'views'.DIRECTORY_SEPARATOR);
 define('PLUGIN_CSS',   PLUGIN_DIR.'styles'.DIRECTORY_SEPARATOR);
 define('PLUGIN_JS',    PLUGIN_DIR.'js'.DIRECTORY_SEPARATOR);
 
-//http://www.infosurv.com/wp-content/plugins/infosurv-testimonials/src/infosurv-testimonials.php
-
-
 chdir('wp-content/plugins/infosurv-testimonials/src/');
 require_once('functions.php');
-
-//Create a Jade Parser Object
-//$jade = new \Jade\Jade();
-//$name = 'Paul'; 
-
-//Create your template you want to parse
-//$template = "p Hi my name is $name";
-//$template .= " im a jade created string with a path of ".__FILE__;
-
-//Parse the template and output the results.
-//echo $jade->render($template);
-
-//Grab a file by its path and render it.
-//echo $jade->render('./views/jade/test.jade.php');
-
+ 
 class InfTestimonials 
 {
 	public $post_id;
@@ -198,7 +181,7 @@ class InfTestimonials
 	}
 	
 	/**
-	 * Display a testimonial
+	 * Display a testimonial: Uses the WordPress loop to build all the post data
 	 *
 	 * @param	int $post_per_page  The number of testimonials you want to display
 	 * @param	string $orderby  The order by setting  https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters
@@ -222,16 +205,21 @@ class InfTestimonials
 			//Build the collection containers
 			$testimonials = array();
 			$testimonials['start'] 			= array();
-			$testimonials['categories']	= array();
+			$testimonials['categories']		= array();
 			$testimonials['titles'] 		= array();
 			$testimonials['body'] 			= array();				
 			$testimonials['end'] 			= array();
-			$wrapper								= array('<div id="isotope_wrapper" class="clearfix">', '<div id="isotope_container" class="isotope_container clearfix">');
-			$inc = 0;
+			$wrapper						= array('<div id="isotope_wrapper" class="clearfix">', '<div id="isotope_container" class="isotope_container clearfix">');
+			
+			$acceptable_labels = array('Show All', 'Case Study', 'Project', 'Testimonial');
+			$inc = 0; //This is what classifies the post by category type
 			
 			if ( $query->have_posts() ): while ( $query->have_posts() ) : $query->the_post();
 					$post_id = get_the_ID();
-					$testimonials['categories'][] = get_the_category( $post_id );
+					$cat = get_the_category( $post_id );
+					$testimonials['categories'][] = $cat;
+					$inc = $this->resolveCateogryNameToIdx( $cat, $acceptable_labels );
+					
 					$testimonial_data = get_post_meta( $post_id, '_testimonial', true );
 					$client_name = ( empty( $testimonial_data['client_name'] ) ) ? '' : $testimonial_data['client_name'];
 					$source = ( empty( $testimonial_data['source'] ) ) ? '' : ' - ' . $testimonial_data['source'];
@@ -241,7 +229,6 @@ class InfTestimonials
 					
 					//PLUGIN_VIEWS - 
 					require "views/thumbnail-format.php";					
-					$inc++;
 				endwhile; 
 				wp_reset_postdata();
 			endif;
@@ -254,7 +241,33 @@ class InfTestimonials
 			
 		return $testimonials_return;
 	}
-	
+	public function resolveCateogryNameToIdx( $cat, $allowed_categories = array() )
+	{
+		$name = $cat[0]->category_nicename;
+		$to_return = null;
+
+		switch($name) 
+		{
+			case "case-study-2":
+				$name = 'Case Study';
+				break;
+			case "project":
+				$name = 'Project';
+				break;
+			case "testimonial": 
+				$name = 'Testimonial';
+				break;
+		}
+		
+		foreach($allowed_categories as $i => $val)
+		{
+			if($name == $val){
+				$to_return = $i - 1;
+			}
+		}
+
+		return $to_return;
+	}
 	public function extractCategories($categories)
 	{
 		$categories_to_return = array();
@@ -279,7 +292,6 @@ class InfTestimonials
 	{
 		$start = '<div id="filters_wrapper" class="clearfix"><ul id="filters" class="clearfix"><li><a href="#" data-filter="*">Show All <span class="sep"> / </span></a></li>';
 		$body = '';
-		
 		foreach($categories as $i => $value)
 		{
 			$body .= "<li><a href='#' data-filter='.type".$i."'> $value <span class='sep'> / </span></a></li>";
@@ -343,7 +355,7 @@ class InfTestimonials
 		$this->current_post_classnames = $classname;
 		return $classname;
 	}
-	public function determineInfoType()
+	public function determineInfoType( $acceptable_labels = null )
 	{
 		$return_val = "";
 		$categories = $this->current_post_classnames;
@@ -360,17 +372,17 @@ class InfTestimonials
 		 foreach($filtered as $item){
 		 	switch($item){
 		 		case "testimonial":
-		 			$return_val = $item;
+		 			$return_val = "Testimonial";
 		 			return $return_val;
 		 			break;
 
 		 		case "case-study-2":
 			 		$return_val = $item;
-			 		return $return_val;
+			 		return "Case Study";
 		 			break;
 
 		 		case "project":
-		 			$return_val = $item;
+		 			$return_val = '';
 		 			return $return_val;
 		 			break;
 
